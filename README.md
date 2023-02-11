@@ -25,7 +25,7 @@ services:
 Containers are launched with `docker-compose`:
 
 ```
-docker-compose up
+$ docker-compose up
 ```
 
 ## Configure and start replication
