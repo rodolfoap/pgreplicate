@@ -69,8 +69,8 @@ INSERT 0 10
 
 Now, we transfer all STRUCTURE, not the data, from the database `dboriginal` on the PUBLISHER to the database `dbreplica` on the SUBSCRIBER:
 ```
-+ docker exec -i publisher pg_dump -t table1 -s dboriginal -U postgres
-+ docker exec -i subscriber psql -U postgres -d dbreplica
++ docker exec -i publisher pg_dump -t table1 -s dboriginal -U postgres|docker exec -i subscriber psql -U postgres -d dbreplica;
+
 SET
 SET
 SET
