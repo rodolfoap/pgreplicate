@@ -1,0 +1,44 @@
+version: '3'
+networks:
+  net_pg:
+    name: net_pg
+    driver: bridge
+
+services:
+  # ___________________________________________________________ Postgres1
+  publisher:
+    container_name: publisher
+    image: postgres:11-alpine
+    environment:
+      - POSTGRES_DB=dboriginal
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5431:5432"
+    networks:
+      - net_pg
+    # This wal_level option defines the host as a PUBLISHER
+    command: postgres -c wal_level=logical
+
+  # ___________________________________________________________ Postgres2
+  subscriber:
+    container_name: subscriber
+    image: postgres:11-alpine
+    environment:
+      - POSTGRES_DB=dbreplica
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    networks:
+      - net_pg
+
+  # ___________________________________________________________ Adminer
+  adminer:
+    container_name: adminer
+    image: adminer
+    ports:
+      - 8000:8080
+    depends_on:
+      - publisher
+      - subscriber
+    networks:
+      - net_pg
