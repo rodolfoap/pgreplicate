@@ -4,7 +4,19 @@ This is a simple example of database replication, based on https://www.youtube.c
 
 The replication process is simple, and only PostgreSQL native tools are required.
 
-## Launch `docker-compose`
+## Usage (TLDR)
+
+If you need to learn quick, just do:
+```
+$ docker-compose up -d
+$ ./replicate.bash
+```
+
+There you have. Now you're an expert on replication.
+
+## Usage
+
+### Launch `docker-compose`
 
 Launch two PostgreSQL containers, which will hold the replicated databases. The containers are:
 
@@ -28,7 +40,7 @@ Containers are launched with `docker-compose`:
 $ docker-compose up
 ```
 
-## Configure and start replication
+### Configure and start replication
 
 
 Once the containers are running, just run the command replicate.bash and read the output thoroughly:
@@ -37,7 +49,7 @@ Once the containers are running, just run the command replicate.bash and read th
 $ ./replicate.bash
 ```
 
-## Execution log
+### Execution log
 
 This is a typical execution log, which is just a copy of the output produced by the `./replicate.bash` command.
 
