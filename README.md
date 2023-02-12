@@ -131,6 +131,13 @@ NOTICE:  created replication slot "theplug" on publisher
 CREATE SUBSCRIPTION
 ```
 
+If the `wal_level` option would not be correctly set on the PUBLISHER, you would get an error like this...
+```
++ docker exec -it subscriber psql -U postgres -d dbreplica -c "CREATE SUBSCRIPTION theplug CONNECTION 'dbname=dboriginal host=publisher user=postgres password=password' PUBLICATION thesocket;"
+ERROR:  could not create replication slot "theplug": ERROR:  logical decoding requires wal_level >= logical
+```
+... and obviously, there would be no replication.
+
 Its the time to check if the SUBSCRIBER has data:
 ```
 + docker exec -it subscriber psql -U postgres -d dbreplica -c 'SELECT * FROM table1;'
